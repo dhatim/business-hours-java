@@ -11,16 +11,15 @@ import java.util.stream.Collectors;
 /**
  * A class representing business hours.
  * <p>
- * The opening times are specified as a string which adheres to the format:
- * <pre>
- *   sub-period[, sub-period...]
- * </pre> If the period is blank, then the business supposed to be always open.
+ * The business hours are specified as a string which adheres to the format:
+ *
+ * <pre>sub-period[, sub-period...]</pre>
+ *
+ * If the period is blank, then the business supposed to be always open.
  * <br>
  * A sub-period is of the form:
- * <pre>
- *   scale {range [range ...]} [scale {range [range ...]}]
- * </pre> Scale must be one of three different scales (or their equivalent
- * codes):
+ * <pre>  scale {range [range ...]} [scale {range [range ...]}]</pre> Scale must
+ * be one of three different scales (or their equivalent codes):
  * <table summary="valid period scales">
  * <tr>
  * <th>Scale</th>
@@ -30,7 +29,7 @@ import java.util.stream.Collectors;
  * <tr>
  * <td>wday</td>
  * <td>wd</td>
- * <td>1(Monday) to 7(Sunday) or mo, tu, we, th, fr, sa, su</td>
+ * <td>1 (Monday) to 7 (Sunday) or mo, tu, we, th, fr, sa, su</td>
  * </tr>
  * <tr>
  * <td>hour</td>
@@ -43,7 +42,8 @@ import java.util.stream.Collectors;
  * <td>0-59</td>
  * </tr>
  * </table>
- * The same scale type may be specified multiple times. Additional scales simply
+ *
+ The same scale type may be specified multiple times. Additional scales simply
  * extend the range defined by previous scales of the same type.
  * <br>
  * The range for a given scale must be a valid value in the form of
@@ -58,26 +58,30 @@ import java.util.stream.Collectors;
  * <p>
  * Note that whitespaces can be anywhere. Furthermore, when using letters to
  * specify week days, only the first two are significant and the case is not
- * important: <code>Sunday</code> or <code>Sun</code> are valid specifications
- * for su.
+ * important:
+ * <code>Sunday</code> or <code>Sun</code> are valid specifications for
+ * <code>su</code>.
+ *
  * <h3>Examples:</h3>
- * To specify a time period from Monday through Friday, 9am to 5pm, use a period
- * such as:
- * <pre>
- *    wd {Mon-Fri} hr {9am-4pm}
- * </pre> To specify a time period from Monday through Friday, 9am to 5pm on
+ *
+ To specify business hours that go from Monday through Friday, 9am to 5pm:
+ *
+ * <pre>wd {Mon-Fri} hr {9am-4pm}</pre>
+ *
+ * To specify business hours that go from Monday through Friday, 9am to 5pm on
  * Monday, Wednesday, and Friday, and 9am to 3pm on Tuesday and Thursday, use a
  * period such as:
- * <pre>
- *   wd {Mon Wed Fri} hr {9am-4pm}, wd{Tue Thu} hr {9am-2pm}
- * </pre> To specify a period that describes every other half-hour, use
- * something like:
- * <pre>
- *    minute { 0-29 }
- * </pre> To specify the morning, use:
- * <pre>
- *   hour { 12am-11am }
- * </pre> Remember, 11am is not 11:00am, but rather 11:00am - 11:59am.
+ *
+ * <pre>wd {Mon Wed Fri} hr {9am-4pm}, wd{Tue Thu} hr {9am-2pm}</pre>
+ *
+ * To specify business hours open every other half-hour, use something like:
+ * <pre>minute { 0-29 }</pre>
+ *
+ * To specify the morning, use:
+ *
+ * <pre>hour { 12am-11am }</pre>
+ *
+ * Remember, 11am is not 11:00am, but rather 11:00am - 11:59am.
  */
 public class BusinessHours {
 
