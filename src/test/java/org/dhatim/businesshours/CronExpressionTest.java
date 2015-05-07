@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoField;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -43,9 +44,9 @@ public class CronExpressionTest {
         assertEquals(merged.size(), 1);
         assertEquals(merged.iterator().next().toString(), "2-4,6 18 * * *");
 
-        assertEquals(CronExpression.merge(Arrays.asList(cron1, cron5)), Arrays.asList(cron1, cron5));
+        assertEquals(CronExpression.merge(Arrays.asList(cron1, cron5)), new HashSet<>(Arrays.asList(cron1, cron5)));
 
-        assertEquals(CronExpression.merge(Arrays.asList(cron1, cron6)), Arrays.asList(cron6));
+        assertEquals(CronExpression.merge(Arrays.asList(cron1, cron6)), new HashSet<>(Arrays.asList(cron6)));
     }
 
 }
