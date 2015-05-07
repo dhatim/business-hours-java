@@ -6,7 +6,7 @@ This java 8 library helps dealing with business hours, such has "Monday through 
 
 Simply call the BusinessHours constructor:
 
-<pre>BusinessHours businessHours = new BusinessHours("wday {Mon-Fri} hour {9am-6pm}, wday {Sat} hour {9am-12pm}");</pre>
+<pre>BusinessHours businessHours = new BusinessHours("wday{Mon-Fri} hour{9am-6pm}, wday{Sat} hour{9am-12pm}");</pre>
 
 The constructor argument is a String representation of the business hours which must adhere to the format:
 
@@ -51,7 +51,7 @@ Scale must be one of three different scales (or their equivalent codes):
  <p>
  Note that whitespaces can be anywhere.
  Furthermore, when using letters to specify week days, only the first two are significant and the case is not important:
- <code>Sunday</code> or <code>Sun</code> are valid specifications for su.
+ <code>Sunday</code> or <code>Sun</code> are valid specifications for <code>su</code>.
  
  <h3>Examples:</h3>
  
