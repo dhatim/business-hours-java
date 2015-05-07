@@ -90,7 +90,6 @@ Scale must be one of three different scales (or their equivalent codes):
     <pre>Set&#60;String&#62; cronExpressions = businessHours.getOpeningCrons();</pre>
     For instance, <code>new BusinessHours("wday{Mon-Fri} hr{9-18}").getOpeningCrons()</code> will return a single cron expression: <code>0 9 * * 1-5</code>.
     <br>
-    But it can also handle much more tricky cases.<br>
-    For instance, a business open on Wednesdays and Thursdays from 20h30 to 3am opens on Wednesdays and Thursdays at 21h, but also on Wednesdays at midnight.<br>
+    Consider a business open on Wednesdays and Thursdays from 20h30 to 3am. It opens on Wednesdays and Thursdays at 21h, but also on Wednesdays at midnight.<br>
     <code>new BusinessHours("wday{We-Th} hr{21-3}").getOpeningCrons()</code> will thus return two cron expressions: <code>0 0 * * 3</code> and <code>0 21 * * 3-4</code>.
   </ul>
