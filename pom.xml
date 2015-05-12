@@ -2,9 +2,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.dhatim</groupId>
-    <artifactId>BusinessHours</artifactId>
+    <artifactId>business-hours</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>A library that helps dealing with business hours, such has "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".</description>
+    <url>https://github.com/dhatim/business-hours-java</url>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Maxime Suret</name>
+            <email>msuret@dhatim.com</email>
+            <organization>Dhatim</organization>
+            <organizationUrl>http://dhatim.com/</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git@github.com:dhatim/business-hours-java.git</connection>
+        <developerConnection>cm:git:git@github.com:dhatim/business-hours-java.git</developerConnection>
+        <url>git@github.com:dhatim/business-hours-java.git</url>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -15,7 +37,7 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 </project>

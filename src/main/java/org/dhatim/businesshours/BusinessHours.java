@@ -1,3 +1,18 @@
+/**
+ * Copyright 2015 Dhatim
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
 package org.dhatim.businesshours;
 
 import java.time.temporal.ChronoUnit;
@@ -43,7 +58,7 @@ import java.util.stream.Collectors;
  * </tr>
  * </table>
  *
- The same scale type may be specified multiple times. Additional scales simply
+ * The same scale type may be specified multiple times. Additional scales simply
  * extend the range defined by previous scales of the same type.
  * <br>
  * The range for a given scale must be a valid value in the form of
@@ -58,13 +73,12 @@ import java.util.stream.Collectors;
  * <p>
  * Note that whitespaces can be anywhere. Furthermore, when using letters to
  * specify week days, only the first two are significant and the case is not
- * important:
- * <code>Sunday</code> or <code>Sun</code> are valid specifications for
- * <code>su</code>.
+ * important: <code>Sunday</code> or <code>Sun</code> are valid specifications
+ * for <code>su</code>.
  *
  * <h3>Examples:</h3>
  *
- To specify business hours that go from Monday through Friday, 9am to 5pm:
+ * To specify business hours that go from Monday through Friday, 9am to 5pm:
  *
  * <pre>wd {Mon-Fri} hr {9am-4pm}</pre>
  *
