@@ -2,6 +2,17 @@
 
 This java 8 library helps dealing with business hours, such has "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".
 
+<h2>Dependency Management</h2>
+
+The project binaries are available in Maven Central. Just add the following to your maven configuration or taylor to your own dependency management system.
+```xml
+<dependency>
+    <groupId>org.dhatim</groupId>
+    <artifactId>business-hours</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
+
 <h2> How do I get a BusinessHours instance ?</h2>
 
 Simply call the BusinessHours constructor:
