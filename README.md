@@ -17,7 +17,9 @@ The project binaries are available in Maven Central. Just add the following to y
 
 Simply call the BusinessHours constructor:
 
-<pre>BusinessHours businessHours = new BusinessHours("wday{Mon-Fri} hour{9am-6pm}, wday{Sat} hour{9am-12pm}");</pre>
+```java
+BusinessHours businessHours = new BusinessHours("wday{Mon-Fri} hour{9am-6pm}, wday{Sat} hour{9am-12pm}");
+```
 
 The constructor argument is a String representation of the business hours which must adhere to the format:
 
@@ -89,17 +91,23 @@ Scale must be one of three different scales (or their equivalent codes):
  <ul>
  <li>
     It tells you if the business is open at any given time:
-    <pre>  boolean open = businessHours.isOpen(LocalDateTime.now());</pre>
+```java
+boolean open = businessHours.isOpen(LocalDateTime.now());
+```
  </li>
  <li>
     It tells you how long it will be before the next business opening:
-    <pre>  long secondsToOpening = businessHours.timeBeforeOpening(LocalDateTime.now(), ChronoUnit.SECONDS);</pre>
+```java
+long secondsToOpening = businessHours.timeBeforeOpening(LocalDateTime.now(), ChronoUnit.SECONDS);
+```
   </li>
   <li>
     If you need to perform specific actions at each business opening, it gives you cron expressions that will fire at each opening time.
     You can feed them to Cron4j, Quartz or Spring to schedule whatever you fancy.
-    <pre>Set&#60;String&#62; cronExpressions = businessHours.getOpeningCrons();</pre>
-    For instance, <code>new BusinessHours("wday{Mon-Fri} hr{9-18}").getOpeningCrons()</code> will return a single cron expression: <code>0 9 * * 1-5</code>.
+```java
+Set<String> cronExpressions = businessHours.getOpeningCrons();
+```
+For instance, <code>new BusinessHours("wday{Mon-Fri} hr{9-18}").getOpeningCrons()</code> will return a single cron expression: <code>0 9 * * 1-5</code>.
     <br>
     Consider a business open on Wednesdays and Thursdays from 20h30 to 3am. It opens on Wednesdays and Thursdays at 21h, but also on Wednesdays at midnight.<br>
     <code>new BusinessHours("wday{We-Th} hr{21-3}").getOpeningCrons()</code> will thus return two cron expressions: <code>0 0 * * 3</code> and <code>0 21 * * 3-4</code>.
