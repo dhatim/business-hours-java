@@ -7,6 +7,8 @@ decrypt:
 docker:
   image: "teamed/docker-java-8"
 release:
+  commanders:
+    - msuret
   script: |
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
