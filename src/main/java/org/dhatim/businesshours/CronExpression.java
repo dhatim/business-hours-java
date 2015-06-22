@@ -38,7 +38,11 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-class CronExpression {
+/**
+ * A representation of cron expressions.
+ * @author Maxime Suret
+ */
+public class CronExpression {
 
     private static TemporalField[] CRON_FIELDS = {
         ChronoField.MINUTE_OF_HOUR,
@@ -49,6 +53,20 @@ class CronExpression {
 
     private final Map<TemporalField, SortedSet<Integer>> fieldValues;
 
+    /**
+     * Create a CronExpression that triggers when the given temporal occurs.
+     * Only the following fields of the temporal (if they are supported) are
+     * supported:
+     * <ul>
+     * <li>{@link ChronoField#MINUTE_OF_HOUR}</li>
+     * <li>{@link ChronoField#HOUR_OF_DAY}</li>
+     * <li>{@link ChronoField#DAY_OF_MONTH}</li>
+     * <li>{@link ChronoField#MONTH_OF_YEAR}</li>
+     * <li>{@link ChronoField#DAY_OF_WEEK}</li>
+     * </ul>
+     *
+     * @param temporal the temporal from which to build the cron expression
+     */
     public CronExpression(Temporal temporal) {
 
         //get the field values that are supported by the temporal
@@ -105,11 +123,18 @@ class CronExpression {
                                 .collect(Collectors.toCollection(TreeSet::new)))));
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return fieldValues.hashCode();
     }
 
+    /**
+     * Tells if this cron expression is equals to the given one.
+     * Two cron expresions are equals if they trigger at exactly the same moments.
+     * @param obj the object to this expression compare to
+     * @return true if the expressions are equals, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         return Optional
@@ -119,6 +144,13 @@ class CronExpression {
                 .isPresent();
     }
 
+    /**
+     * Convert this cron expression into its string representation
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/Cron#CRON_expression">the
+     * cron expression format</a>
+     * @return the string representation of this cron expression
+     */
     @Override
     public String toString() {
         return Arrays.stream(CRON_FIELDS)
@@ -158,6 +190,14 @@ class CronExpression {
                 : range.getMinimum() + "-" + range.getMaximum();
     }
 
+    /**
+     * Merge the given cron expressions where it is possible.
+     * For instance, <code>"2 18 * * *"</code> and <code>"4 18 * * *"</code>
+     * can be merged in <code>"2,4 18 * * *"</code>
+     * @param crons the cron expressions to merge
+     * @return the merged cron expressions.
+     * They will trigger at the exact same moments as the input cron expressions.
+     */
     public static Set<CronExpression> merge(Collection<CronExpression> crons) {
         Set<CronExpression> mergedCrons = new HashSet<>(crons.size());
         for (CronExpression cronToMerge : crons) {

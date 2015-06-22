@@ -12,6 +12,4 @@ release:
   script: |
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy --settings /home/r/settings.xml
-    git checkout master
-    git merge __rultor
+    mvn clean deploy site-deploy --settings /home/r/settings.xml

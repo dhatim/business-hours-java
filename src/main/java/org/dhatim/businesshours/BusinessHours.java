@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * A class representing business hours.
+ * A representation of business hours.
  * <p>
  * The business hours are specified as a string which adheres to the format:
  *
@@ -96,6 +96,8 @@ import java.util.stream.Collectors;
  * <pre>hour { 12am-11am }</pre>
  *
  * Remember, 11am is not 11:00am, but rather 11:00am - 11:59am.
+ *
+ * @author Maxime Suret
  */
 public class BusinessHours {
 
@@ -173,11 +175,11 @@ public class BusinessHours {
     }
 
     /**
-     * Check if this BusinessHours is equals to the specified BusinessHours.
+     * Tells if these business hours are equals to the given ones.
      * <p>
-     * Two BusinessHours are considered equals if they are open at exactly the
-     * same instants, regardless of the string representation used to build
-     * them.
+     * Business hours are equals if they are open at exactly the
+     * same instants (regardless of the string representation used to build
+     * them).
      *
      * @param obj the other BusinessHours, null returns false
      * @return true if the other BusinessHours is equals to this one

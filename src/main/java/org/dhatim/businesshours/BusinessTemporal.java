@@ -35,7 +35,13 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeMap;
 
-class BusinessTemporal implements Temporal, Comparable<Temporal> {
+/**
+ * A temporal containing fields that can be used to define business hours. These
+ * fields must be continguous and have a fixed range.
+ *
+ * @author Maxime Suret
+ */
+public class BusinessTemporal implements Temporal, Comparable<Temporal> {
 
     private final NavigableMap<ChronoField, Integer> fieldValues;
 
@@ -45,6 +51,13 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         validateFields(this.fieldValues.navigableKeySet());
     }
 
+    /**
+     * Builds a {@link BusinessTemporal} instance from its fields values
+     *
+     * @param fieldValues the values of the fields. The fields must be
+     * contiguous and have a fixed range.
+     * @return the {@link BusinessTemporal} instance
+     */
     public static BusinessTemporal of(Map<ChronoField, Integer> fieldValues) {
         return new BusinessTemporal(fieldValues);
     }
@@ -73,6 +86,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public <R> R query(TemporalQuery<R> query) {
@@ -82,6 +98,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         return Temporal.super.query(query);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSupported(TemporalField field) {
         if (field instanceof ChronoField) {
@@ -90,6 +109,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         return field.isSupportedBy(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long getLong(TemporalField field) {
         if (field instanceof ChronoField) {
@@ -101,6 +123,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         return field.getFrom(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSupported(TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {
@@ -112,6 +137,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         return unit.isSupportedBy(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Temporal with(TemporalField field, long newValue) {
 
@@ -128,6 +156,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
         return field.adjustInto(this, newValue);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Temporal plus(long amountToAdd, TemporalUnit unit) {
         if (unit instanceof ChronoUnit) {
@@ -156,6 +187,9 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
                 .plus(getLong(end, endPrecision, fieldValues.firstKey().getBaseUnit()), endPrecision);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public long until(Temporal endExclusive, TemporalUnit unit) {
         //the implementation requirements state that 'endExclusive' must first be converted into a BusinessTemporal
@@ -220,16 +254,29 @@ class BusinessTemporal implements Temporal, Comparable<Temporal> {
                 .navigableKeySet();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(Temporal t) {
         return Long.signum(-until(t, fieldValues.firstKey().getBaseUnit()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return fieldValues.hashCode();
     }
 
+    /**
+     * Tells if this business temporal is equals to another one. Two business
+     * temporals are equals if they support the same fields, and these fields
+     * have the same values.
+     * @param obj the object to comapare this business tempral to
+     * @return true if this object and obj are equals, false otherwise.
+     */
     @Override
     public boolean equals(Object obj) {
         return Optional.ofNullable(obj)
