@@ -24,7 +24,7 @@
     </developers>
     <scm>
         <connection>scm:git:git@github.com:dhatim/business-hours-java.git</connection>
-        <developerConnection>cm:git:git@github.com:dhatim/business-hours-java.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:dhatim/business-hours-java.git</developerConnection>
         <url>git@github.com:dhatim/business-hours-java.git</url>
     </scm>
     <distributionManagement>
