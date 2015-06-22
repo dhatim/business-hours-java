@@ -12,4 +12,4 @@ release:
   script: |
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
-    mvn clean deploy site-deploy --settings /home/r/settings.xml
+    mvn clean deploy site:site --settings /home/r/settings.xml

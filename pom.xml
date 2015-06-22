@@ -116,10 +116,9 @@
                         <goals>
                             <goal>site</goal>
                         </goals>
-                        <phase>site-deploy</phase>
                         <configuration>
                             <server>github</server>
-                            <message>publish javadoc</message>
+                            <message>Publish javadoc</message>
                             <outputDirectory>target/apidocs</outputDirectory>
                         </configuration>
                     </execution>
