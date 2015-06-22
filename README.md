@@ -2,17 +2,33 @@
 
 This java 8 library helps dealing with business hours, such has "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".
 
-<h2>Dependency Management</h2>
-
-The project binaries are available in Maven Central. Just add the following to your maven configuration or taylor to your own dependency management system.
-```xml
-<dependency>
-    <groupId>org.dhatim</groupId>
-    <artifactId>business-hours</artifactId>
-    <version>1.0.0</version>
-</dependency>
+<h2>What does it do ?</h2>
+ 
+ <ul>
+ <li>
+    It tells you if the business is open at any given time:
+```java
+boolean open = businessHours.isOpen(LocalDateTime.now());
 ```
-
+ </li>
+ <li>
+    It tells you how long it will be before the next business opening:
+```java
+long secondsToOpening = businessHours.timeBeforeOpening(LocalDateTime.now(), ChronoUnit.SECONDS);
+```
+  </li>
+  <li>
+    If you need to perform specific actions at each business opening, it gives you cron expressions that will fire at each opening time.
+    You can feed them to Cron4j, Quartz or Spring to schedule whatever you fancy.
+```java
+Set<String> cronExpressions = businessHours.getOpeningCrons();
+```
+For instance, <code>new BusinessHours("wday{Mon-Fri} hr{9-18}").getOpeningCrons()</code> will return a single cron expression: <code>0 9 * * 1-5</code>.
+    <br>
+    Consider a business open on Wednesdays and Thursdays from 20h30 to 3am. It opens on Wednesdays and Thursdays at 21h, but also on Wednesdays at midnight.<br>
+    <code>new BusinessHours("wday{We-Th} hr{21-3}").getOpeningCrons()</code> will thus return two cron expressions: <code>0 0 * * 3</code> and <code>0 21 * * 3-4</code>.
+  </ul>
+  
 <h2> How do I get a BusinessHours instance ?</h2>
 
 Simply call the BusinessHours constructor:
@@ -86,29 +102,17 @@ Scale must be one of three different scales (or their equivalent codes):
  
  Remember, 11am is not 11:00am, but rather 11:00am - 11:59am.
  
- <h2>What does it do ?</h2>
- 
- <ul>
- <li>
-    It tells you if the business is open at any given time:
-```java
-boolean open = businessHours.isOpen(LocalDateTime.now());
+ <h2>Dependency Management</h2>
+
+The project binaries are available in Maven Central. Just add the following to your maven configuration or taylor to your own dependency management system.
+```xml
+<dependency>
+    <groupId>org.dhatim</groupId>
+    <artifactId>business-hours</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
- </li>
- <li>
-    It tells you how long it will be before the next business opening:
-```java
-long secondsToOpening = businessHours.timeBeforeOpening(LocalDateTime.now(), ChronoUnit.SECONDS);
-```
-  </li>
-  <li>
-    If you need to perform specific actions at each business opening, it gives you cron expressions that will fire at each opening time.
-    You can feed them to Cron4j, Quartz or Spring to schedule whatever you fancy.
-```java
-Set<String> cronExpressions = businessHours.getOpeningCrons();
-```
-For instance, <code>new BusinessHours("wday{Mon-Fri} hr{9-18}").getOpeningCrons()</code> will return a single cron expression: <code>0 9 * * 1-5</code>.
-    <br>
-    Consider a business open on Wednesdays and Thursdays from 20h30 to 3am. It opens on Wednesdays and Thursdays at 21h, but also on Wednesdays at midnight.<br>
-    <code>new BusinessHours("wday{We-Th} hr{21-3}").getOpeningCrons()</code> will thus return two cron expressions: <code>0 0 * * 3</code> and <code>0 21 * * 3-4</code>.
-  </ul>
+
+<h2>Javadoc</h2>
+
+The librairy javadoc can be found <a href="http://dhatim.github.io/business-hours-java/">here</a>.
