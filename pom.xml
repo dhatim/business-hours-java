@@ -121,7 +121,6 @@
                             <server>github</server>
                             <message>publish javadoc</message>
                             <outputDirectory>target/apidocs</outputDirectory>
-                            <path>${site.path}</path>
                         </configuration>
                     </execution>
                 </executions>
