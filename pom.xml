@@ -113,10 +113,10 @@
                 <version>0.12</version>
                 <executions>
                     <execution>
-                        <id>default-cli</id>
                         <goals>
                             <goal>site</goal>
                         </goals>
+                        <phase>deploy</phase>
                         <configuration>
                             <server>github</server>
                             <message>Publish javadoc</message>
