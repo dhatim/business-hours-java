@@ -38,7 +38,7 @@ public class BusinessPeriod {
     private final BusinessTemporal end;
 
     /**
-     * Builds a new instance of {@link BusinessPeriod}
+     * Builds a new instance of {@link BusinessPeriod}.
      * @param start when the period opens
      * @param end when the period closes
      */
@@ -48,7 +48,7 @@ public class BusinessPeriod {
     }
 
     /**
-     * Tells if this period is always open
+     * Tells if this period is always open.
      * @return true if the business is always open, false otherwise
      */
     public boolean alwaysOpen() {
@@ -75,7 +75,7 @@ public class BusinessPeriod {
     }
 
     /**
-     * Get a {@link CronExpression} that triggers at each period opening
+     * Get a {@link CronExpression} that triggers at each period opening.
      * e.g. if the period is 9am-18pm, the result will be <code>0 9 * * *</code>
      * @return <code>null</code> if the period is always open, else the cron expression
      */
@@ -84,7 +84,7 @@ public class BusinessPeriod {
     }
 
     /**
-     * Get the opening time of this period
+     * Get the opening time of this period.
      * @return when this period opens
      */
     public BusinessTemporal getStart() {
@@ -92,7 +92,7 @@ public class BusinessPeriod {
     }
 
     /**
-     * Get the closing time of this period
+     * Get the closing time of this period.
      * @return when this period closes
      */
     public BusinessTemporal getEnd() {
@@ -125,7 +125,7 @@ public class BusinessPeriod {
     }
 
     /**
-     * Merge intersecting or adjacent periods
+     * Merge intersecting or adjacent periods.
      * @param periods the periods to merge
      * @return the merged periods.
      * Their opening time spans will be exactly the same as the input periods.

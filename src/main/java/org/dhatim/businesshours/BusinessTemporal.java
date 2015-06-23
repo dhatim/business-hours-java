@@ -69,7 +69,7 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
     }
 
     /**
-     * Check that the given fields are contiguous and have a fixed length
+     * Check that the given fields are contiguous and have a fixed length.
      *
      * @param supportedFields the fields
      */
@@ -203,7 +203,7 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
     }
 
     /**
-     * Increments the least significant field of this Business Temporal by one
+     * Increments the least significant field of this Business Temporal by one.
      *
      * @return a new Business Temporal with the incremented field
      */
@@ -236,8 +236,8 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
     }
 
     /**
-     * get all the fields that are measured with a unit greater than or equals
-     * to the provided unit
+     * Get all the fields that are measured with a unit greater than or equals
+     * to the provided unit.
      *
      * @param unit the unit
      * @return a set containing the relevant fields
@@ -287,7 +287,7 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
 
     /**
      * Equivalent of Duration.get(unit), but supports units differents than
-     * SECOND and NANO
+     * SECOND and NANO.
      *
      * @param duration the duration
      * @param unit the unit
@@ -298,7 +298,7 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
     }
 
     /**
-     * Equivalent of Temporal.getLong with arbitrary base and range units
+     * Equivalent of Temporal.getLong with arbitrary base and range units.
      *
      * @param temporal the temporal to query
      * @param baseUnit the base unit

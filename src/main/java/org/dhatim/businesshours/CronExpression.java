@@ -131,7 +131,7 @@ public class CronExpression {
 
     /**
      * Tells if this cron expression is equals to the given one.
-     * Two cron expresions are equals if they trigger at exactly the same moments.
+     * Two cron expresions are equals if they trigger at exactly the same instants.
      * @param obj the object to this expression compare to
      * @return true if the expressions are equals, false otherwise
      */
@@ -145,7 +145,7 @@ public class CronExpression {
     }
 
     /**
-     * Convert this cron expression into its string representation
+     * Convert this cron expression into its string representation.
      *
      * @see <a href="https://en.wikipedia.org/wiki/Cron#CRON_expression">the
      * cron expression format</a>
@@ -193,7 +193,7 @@ public class CronExpression {
     /**
      * Merge the given cron expressions where it is possible.
      * For instance, <code>"2 18 * * *"</code> and <code>"4 18 * * *"</code>
-     * can be merged in <code>"2,4 18 * * *"</code>
+     * can be merged in <code>"2,4 18 * * *"</code>.
      * @param crons the cron expressions to merge
      * @return the merged cron expressions.
      * They will trigger at the exact same moments as the input cron expressions.
