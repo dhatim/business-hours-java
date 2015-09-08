@@ -41,7 +41,7 @@ The constructor argument is a String representation of the business hours which 
 
 <pre>sub-period[, sub-period...]</pre>
 
-If the period is blank, then the business supposed to be always open.
+If the period is blank, then the business is supposed to be always open.
 <br>
 A sub-period is of the form:
 <pre>  scale {range [range ...]} [scale {range [range ...]}]</pre>
