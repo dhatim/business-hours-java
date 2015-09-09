@@ -116,3 +116,7 @@ The project binaries are available in Maven Central. Just add the following to y
 <h2>Javadoc</h2>
 
 The librairy javadoc can be found <a href="http://dhatim.github.io/business-hours-java/">here</a>.
+
+<h2>Credits</h2>
+
+The string representation of business hours and its associated documentation are strongly inpired from <a href="mailto:perl@pryan.org">Patrick Ryan</a>'s <a href="http://search.cpan.org/~pryan/Period-1.20/Period.pm">Time::Period Perl module.</a>
