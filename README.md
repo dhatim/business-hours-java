@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dhatim/business-hours-java.svg?branch=master)](https://travis-ci.org/dhatim/business-hours-java)
+
 <h1>business-hours-java</h1>
 
 This java 8 library helps dealing with business hours, such has "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".
