@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/dhatim/business-hours-java.svg?branch=master)](https://travis-ci.org/dhatim/business-hours-java)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.dhatim/business-hours/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.dhatim/business-hours)
+[![Coverage Status](https://coveralls.io/repos/github/dhatim/business-hours-java/badge.svg?branch=master)](https://coveralls.io/github/dhatim/business-hours-java?branch=master)
+[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.dhatim/business-hours/badge.svg)](http://www.javadoc.io/doc/org.dhatim/business-hours)
+
 <h1>business-hours-java</h1>
 
 This java 8 library helps dealing with business hours, such has "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".
@@ -115,7 +120,7 @@ The project binaries are available in Maven Central. Just add the following to y
 
 <h2>Javadoc</h2>
 
-The librairy javadoc can be found <a href="http://dhatim.github.io/business-hours-java/">here</a>.
+The librairy javadoc can be found <a href="http://www.javadoc.io/doc/org.dhatim/business-hours">here</a>.
 
 <h2>Credits</h2>
 
