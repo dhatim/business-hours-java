@@ -12,12 +12,14 @@ This java 8 library helps dealing with business hours, such has "Monday through 
  <ul>
  <li>
     It tells you if the business is open at any given time:
+    
 ```java
 boolean open = businessHours.isOpen(LocalDateTime.now());
 ```
  </li>
  <li>
     It tells you how long it will be before the next business opening:
+    
 ```java
 long secondsToOpening = businessHours.timeBeforeOpening(LocalDateTime.now(), ChronoUnit.SECONDS);
 ```
@@ -25,6 +27,7 @@ long secondsToOpening = businessHours.timeBeforeOpening(LocalDateTime.now(), Chr
   <li>
     If you need to perform specific actions at each business opening, it gives you cron expressions that will fire at each opening time.
     You can feed them to Cron4j, Quartz or Spring to schedule whatever you fancy.
+
 ```java
 Set<String> cronExpressions = businessHours.getOpeningCrons();
 ```
