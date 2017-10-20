@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/dhatim/business-hours-java.svg?branch=master)](https://travis-ci.org/dhatim/business-hours-java)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.dhatim/business-hours/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.dhatim/business-hours)
 [![Coverage Status](https://coveralls.io/repos/github/dhatim/business-hours-java/badge.svg?branch=master)](https://coveralls.io/github/dhatim/business-hours-java?branch=master)
-[![Javadoc](https://javadoc-emblem.rhcloud.com/doc/org.dhatim/business-hours/badge.svg)](http://www.javadoc.io/doc/org.dhatim/business-hours)
+[![Javadoc](https://www.javadoc.io/badge/org.dhatim/business-hours.svg)](http://www.javadoc.io/doc/org.dhatim/business-hours)
 
 <h1>business-hours-java</h1>
 
