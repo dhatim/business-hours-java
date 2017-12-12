@@ -64,7 +64,11 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
 
     private static BusinessTemporal from(TemporalAccessor temporal, Set<ChronoField> supportedFields) {
         Map<ChronoField, Integer> fieldValues = new HashMap<>();
-        supportedFields.forEach(field -> fieldValues.put(field, temporal.get(field)));
+        supportedFields.forEach(field -> {
+            if (temporal.isSupported(field)) {
+                fieldValues.put(field, temporal.get(field));
+            }
+        });
         return new BusinessTemporal(fieldValues);
     }
 
@@ -182,6 +186,7 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
         return fieldValues
                 .entrySet()
                 .stream()
+                .filter(entry -> end.isSupported(entry.getKey()))
                 .map(entry -> Duration.of(end.get(entry.getKey()) - entry.getValue(), entry.getKey().getBaseUnit()))
                 .reduce(Duration.ZERO, Duration::plus)
                 .plus(getLong(end, endPrecision, fieldValues.firstKey().getBaseUnit()), endPrecision);
@@ -320,7 +325,11 @@ public class BusinessTemporal implements Temporal, Comparable<Temporal> {
                 currentUnit = (ChronoUnit) field.getRangeUnit();
             }
         }
-        return result % durationInUnit(rangeUnit.getDuration(), baseUnit);
+        long duration = durationInUnit(rangeUnit.getDuration(), baseUnit);
+        if (duration == 0) {
+            return 0;
+        }
+        return result % duration;
     }
 
 }
