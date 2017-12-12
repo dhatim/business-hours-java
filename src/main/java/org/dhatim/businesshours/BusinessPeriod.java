@@ -84,6 +84,15 @@ public class BusinessPeriod {
     }
 
     /**
+     * Get a {@link CronExpression} that triggers at each period closing.
+     * e.g. if the period is 9am-18pm, the result will be <code>59 18 * * *</code>
+     * @return <code>null</code> if the period is always open, else the cron expression
+     */
+    public CronExpression getEndCron() {
+        return alwaysOpen() ? null : new CronExpression(end.increment());
+    }
+
+    /**
      * Get the opening time of this period.
      * @return when this period opens
      */

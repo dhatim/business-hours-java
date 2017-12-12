@@ -114,6 +114,22 @@ public class BusinessHoursTest {
                 });
     }
 
+    @Test
+    public void closingCrons() {
+        assertEquals(new BusinessHours("wday{Mon-Fri} hr{9-18}").getClosingCrons(), Collections.singleton("0 19 * * 1-5"));
+        assertEquals(new BusinessHours("wday{Sa} hr{12-23}, wday{Su}").getClosingCrons(), Collections.singleton("0 0 * * 1"));
+        //every Wednesday and Thursday, from 20h30 to 3am
+        //It opens on Wednesday at midnight, and on Wednesdays and Thursday at 20h30
+        assertEquals(
+                new BusinessHours("wday{We-Th} hr{21-3}, wday{We-Th} hr{20} min{30-59}").getClosingCrons(),
+                new HashSet<String>() {
+                    {
+                        add("0 0 * * 5");
+                        add("0 4 * * 3-4");
+                    }
+                });
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void invalidWeekDay() throws ParseException {
         BusinessHoursParser.parse("wday {su-wtf}");
