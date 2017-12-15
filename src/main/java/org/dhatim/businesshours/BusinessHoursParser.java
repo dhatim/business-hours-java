@@ -36,25 +36,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import javafx.util.Pair;
+import java.util.Map.Entry;
+import java.util.AbstractMap.SimpleImmutableEntry;
 
 class BusinessHoursParser {
 
     /**
      * Maps containing the fields supported by the parsing The keys are the
-     * field itself, while the value is a Pair containing:
+     * field itself, while the value is an Entry containing:
      * <ul>
      * <li>A pattern allowing to identify the field range in the input
      * string</li>
      * <li>A function to parse field values into integers</li>
      * </ul>
      */
-    private static final Map<ChronoField, Pair<Pattern, ToIntFunction<String>>> SUPPORTED_FIELDS
-            = Collections.unmodifiableMap(new HashMap<ChronoField, Pair<Pattern, ToIntFunction<String>>>() {
+    private static final Map<ChronoField, Entry<Pattern, ToIntFunction<String>>> SUPPORTED_FIELDS
+            = Collections.unmodifiableMap(new HashMap<ChronoField, Entry<Pattern, ToIntFunction<String>>>() {
                 {
-                    put(ChronoField.MINUTE_OF_HOUR, new Pair<>(Pattern.compile("(?:min|minute) *\\{(.*?)\\}"), Integer::parseInt));
-                    put(ChronoField.HOUR_OF_DAY, new Pair<>(Pattern.compile("(?:hr|hour) *\\{(.*?)\\}"), BusinessHoursParser::hourStringToInt));
-                    put(ChronoField.DAY_OF_WEEK, new Pair<>(Pattern.compile("(?:wday|wd) *\\{(.*?)\\}"), BusinessHoursParser::weekDayStringToInt));
+                    put(ChronoField.MINUTE_OF_HOUR, new SimpleImmutableEntry<>(Pattern.compile("(?:min|minute) *\\{(.*?)\\}"), Integer::parseInt));
+                    put(ChronoField.HOUR_OF_DAY, new SimpleImmutableEntry<>(Pattern.compile("(?:hr|hour) *\\{(.*?)\\}"), BusinessHoursParser::hourStringToInt));
+                    put(ChronoField.DAY_OF_WEEK, new SimpleImmutableEntry<>(Pattern.compile("(?:wday|wd) *\\{(.*?)\\}"), BusinessHoursParser::weekDayStringToInt));
                 }
             });
 
