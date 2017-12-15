@@ -118,6 +118,21 @@ public class BusinessPeriodTest {
     }
 
     @Test
+    public void getEndCron() {
+        assertEquals(
+                new BusinessPeriod(
+                        BusinessTemporal.of(Collections.singletonMap(ChronoField.MINUTE_OF_HOUR, 10)),
+                        BusinessTemporal.of(Collections.singletonMap(ChronoField.MINUTE_OF_HOUR, 15)))
+                .getEndCron().toString(), "16 * * * *");
+
+        assertNull(
+                new BusinessPeriod(
+                        BusinessTemporal.of(Collections.singletonMap(ChronoField.MINUTE_OF_HOUR, 0)),
+                        BusinessTemporal.of(Collections.singletonMap(ChronoField.MINUTE_OF_HOUR, 59)))
+                .getEndCron());
+    }
+
+    @Test
     public void mergePeriods() {
         BusinessTemporal start1 = BusinessTemporal.of(Collections.singletonMap(ChronoField.MINUTE_OF_HOUR, 10));
         BusinessTemporal end1 = BusinessTemporal.of(Collections.singletonMap(ChronoField.MINUTE_OF_HOUR, 15));

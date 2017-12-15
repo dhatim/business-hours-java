@@ -165,6 +165,26 @@ public class BusinessHours {
     }
 
     /**
+     * Get a set of crons corresponding to each closing. The set is empty if the
+     * business is always open.
+     *
+     * @return the cron set
+     */
+    public Set<String> getClosingCrons() {
+        //get the end crons of all periods and merge them
+        return CronExpression
+                .merge(
+                        periods
+                        .stream()
+                        .map(BusinessPeriod::getEndCron)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet()))
+                .stream()
+                .map(CronExpression::toString)
+                .collect(Collectors.toSet());
+    }
+
+    /**
      * Returns a hash code for this BusinessHours.
      *
      * @return a suitable hash code
