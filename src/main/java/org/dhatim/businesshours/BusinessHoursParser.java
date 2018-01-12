@@ -239,14 +239,21 @@ class BusinessHoursParser {
         //compute the list of acceptable ranges for each field
         SortedMap<ChronoField, List<ValueRange>> acceptedRanges = new TreeMap<ChronoField, List<ValueRange>>();
         SUPPORTED_FIELDS.forEach(
-                (field, parsingElts) -> acceptedRanges.put(
-                        field,
-                        defaultRange(
-                                getStringRanges(subPeriod, parsingElts.getKey())
-                                .stream()
-                                .flatMap(stringRange -> getRange(stringRange, field.range(), parsingElts.getValue()))
-                                .collect(Collectors.toList()),
-                                field.range())));
+                (field, parsingElts) -> {
+                    List<ValueRange> ranges = getStringRanges(subPeriod, parsingElts.getKey())
+                        .stream()
+                        .flatMap(stringRange -> getRange(stringRange, field.range(), parsingElts.getValue()))
+                        .collect(Collectors.toList());
+                    if (ranges.size() > 0) {
+                        acceptedRanges.put(field, ranges);
+                    }
+                });
+
+
+        // When there is no field, insert a default field from 0 to 60 minutes
+        if (acceptedRanges.size() == 0) {
+            acceptedRanges.put(ChronoField.MINUTE_OF_HOUR, Collections.singletonList(ChronoField.SECOND_OF_MINUTE.range()));
+        }
 
         //get all range combination and convert them to business periods
         return getRangeCombinations(acceptedRanges)
