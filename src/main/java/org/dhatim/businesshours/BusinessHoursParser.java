@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -51,7 +52,7 @@ class BusinessHoursParser {
      * </ul>
      */
     private static final Map<ChronoField, Entry<Pattern, ToIntFunction<String>>> SUPPORTED_FIELDS
-            = Collections.unmodifiableMap(new HashMap<ChronoField, Entry<Pattern, ToIntFunction<String>>>() {
+            = Collections.unmodifiableMap(new LinkedHashMap<ChronoField, Entry<Pattern, ToIntFunction<String>>>() {
                 {
                     put(ChronoField.MINUTE_OF_HOUR, new SimpleImmutableEntry<>(Pattern.compile("(?:min|minute) *\\{(.*?)\\}"), Integer::parseInt));
                     put(ChronoField.HOUR_OF_DAY, new SimpleImmutableEntry<>(Pattern.compile("(?:hr|hour) *\\{(.*?)\\}"), BusinessHoursParser::hourStringToInt));
@@ -145,11 +146,6 @@ class BusinessHoursParser {
                 : Stream.of(ValueRange.of(start, fullRange.getMaximum()), ValueRange.of(fullRange.getMinimum(), end));
     }
 
-    private static List<ValueRange> defaultRange(List<ValueRange> providedRanges, ValueRange fullRange) {
-        //no range specified means any time is ok
-        return providedRanges.isEmpty() ? Collections.singletonList(fullRange) : providedRanges;
-    }
-
     /**
      * compute every possible field range combination
      *
@@ -219,6 +215,21 @@ class BusinessHoursParser {
                 endFields.put(field, value);
                 divisor *= rangeLength;
             }
+
+            // Add missing first fields with max range
+            for (Map.Entry<ChronoField, Entry<Pattern, ToIntFunction<String>>> entry : SUPPORTED_FIELDS.entrySet()) {
+                ChronoField field = entry.getKey();
+                if (!startFields.containsKey(field)) {
+                    ValueRange fieldRange = field.range();
+                    startFields.put(field, fieldRange.checkValidIntValue(fieldRange.getMinimum(), field));
+                    endFields.put(field, fieldRange.checkValidIntValue(fieldRange.getMaximum(), field));
+                }
+                else {
+                    break;
+                }
+            }
+
+
             periods.add(new BusinessPeriod(BusinessTemporal.of(startFields), BusinessTemporal.of(endFields)));
         }
 
@@ -239,14 +250,21 @@ class BusinessHoursParser {
         //compute the list of acceptable ranges for each field
         SortedMap<ChronoField, List<ValueRange>> acceptedRanges = new TreeMap<ChronoField, List<ValueRange>>();
         SUPPORTED_FIELDS.forEach(
-                (field, parsingElts) -> acceptedRanges.put(
-                        field,
-                        defaultRange(
-                                getStringRanges(subPeriod, parsingElts.getKey())
-                                .stream()
-                                .flatMap(stringRange -> getRange(stringRange, field.range(), parsingElts.getValue()))
-                                .collect(Collectors.toList()),
-                                field.range())));
+                (field, parsingElts) -> {
+                    List<ValueRange> ranges = getStringRanges(subPeriod, parsingElts.getKey())
+                        .stream()
+                        .flatMap(stringRange -> getRange(stringRange, field.range(), parsingElts.getValue()))
+                        .collect(Collectors.toList());
+                    if (ranges.size() > 0) {
+                        acceptedRanges.put(field, ranges);
+                    }
+                });
+
+
+        // When there is no field, insert a default field from 0 to 60 minutes
+        if (acceptedRanges.size() == 0) {
+            acceptedRanges.put(ChronoField.MINUTE_OF_HOUR, Collections.singletonList(ChronoField.SECOND_OF_MINUTE.range()));
+        }
 
         //get all range combination and convert them to business periods
         return getRangeCombinations(acceptedRanges)
