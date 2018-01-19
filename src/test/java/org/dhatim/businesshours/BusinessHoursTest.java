@@ -102,7 +102,7 @@ public class BusinessHoursTest {
     public void openingCrons() {
         assertEquals(new BusinessHours("wday{Mon-Fri} hr{9-18}").getOpeningCrons(), Collections.singleton("0 9 * * 1-5"));
         assertEquals(new BusinessHours("wday{Sa} hr{12-23}, wday{Su}").getOpeningCrons(), Collections.singleton("0 12 * * 6"));
-        //every Wednesday and Thursday, from 20h30 to 3am
+        //every Wednesday and Thursday, from 20h30 to 4am
         //It opens on Wednesday at midnight, and on Wednesdays and Thursday at 20h30
         assertEquals(
                 new BusinessHours("wday{We-Th} hr{21-3}, wday{We-Th} hr{20} min{30-59}").getOpeningCrons(),
@@ -118,14 +118,14 @@ public class BusinessHoursTest {
     public void closingCrons() {
         assertEquals(new BusinessHours("wday{Mon-Fri} hr{9-18}").getClosingCrons(), Collections.singleton("0 19 * * 1-5"));
         assertEquals(new BusinessHours("wday{Sa} hr{12-23}, wday{Su}").getClosingCrons(), Collections.singleton("0 0 * * 1"));
-        //every Wednesday and Thursday, from 20h30 to 3am
-        //It opens on Wednesday at midnight, and on Wednesdays and Thursday at 20h30
+        //every Wednesday and Thursday, from 9pm to 4:30am
+        //It closes on Wednesday and Thursday at 4:30am, and Friday at midnight
         assertEquals(
-                new BusinessHours("wday{We-Th} hr{21-3}, wday{We-Th} hr{20} min{30-59}").getClosingCrons(),
+                new BusinessHours("wday{We-Th} hr{21-3}, wday{We-Th} hr{4} min{0-29}").getClosingCrons(),
                 new HashSet<String>() {
                     {
                         add("0 0 * * 5");
-                        add("0 4 * * 3-4");
+                        add("30 4 * * 3-4");
                     }
                 });
     }
