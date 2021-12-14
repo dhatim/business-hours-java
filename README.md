@@ -1,5 +1,4 @@
 [![Build Status](https://github.com/dhatim/business-hours-java/workflows/build/badge.svg)](https://github.com/dhatim/business-hours-java/actions)
-[![Coverage Status](https://coveralls.io/repos/github/dhatim/business-hours-java/badge.svg?branch=master)](https://coveralls.io/github/dhatim/business-hours-java?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.dhatim/business-hours-java/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.dhatim/business-hours-java)
 [![Javadocs](http://www.javadoc.io/badge/org.dhatim/business-hours-java.svg)](http://www.javadoc.io/doc/org.dhatim/business-hours-java)
 
