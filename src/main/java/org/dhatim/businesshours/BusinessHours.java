@@ -35,7 +35,8 @@ import java.util.stream.Collectors;
  * A sub-period is of the form:
  * <pre>  scale {range [range ...]} [scale {range [range ...]}]</pre> Scale must
  * be one of three different scales (or their equivalent codes):
- * <table summary="valid period scales">
+ * <table>
+ * <caption>valid period scales</caption>
  * <tr>
  * <th>Scale</th>
  * <th>Scale code</th>
@@ -76,7 +77,7 @@ import java.util.stream.Collectors;
  * important: <code>Sunday</code> or <code>Sun</code> are valid specifications
  * for <code>su</code>.
  *
- * <h3>Examples:</h3>
+ * <h2>Examples:</h2>
  *
  * To specify business hours that go from Monday through Friday, 9am to 5pm:
  *
