@@ -5,7 +5,7 @@
 
 <h1>business-hours-java</h1>
 
-This java 8 library helps dealing with business hours, such as "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".
+This java library helps dealing with business hours, such as "Monday through Friday from 9am to 6pm, and from 9am to 12pm on Saturdays".
 
 <h2>What does it do ?</h2>
  
